@@ -1,0 +1,1 @@
+This is the code for the build a static site boot.dev course
