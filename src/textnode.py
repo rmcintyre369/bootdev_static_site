@@ -29,21 +29,19 @@ class TextNode:
 
 
 def text_node_to_html_node(text_node: TextNode) -> LeafNode:
-
-    tag = text_node.text_type
-    if tag == TextType.TEXT:
+    if text_node.text_type == TextType.TEXT:
         return LeafNode(tag=None, value=text_node.text)
-    if tag == TextType.BOLD:
+    if text_node.text_type == TextType.BOLD:
         return LeafNode(tag="b", value=text_node.text)
-    if tag == TextType.ITALIC:
+    if text_node.text_type == TextType.ITALIC:
         return LeafNode(tag="i", value=text_node.text)
-    if tag == TextType.CODE:
+    if text_node.text_type == TextType.CODE:
         return LeafNode(tag="code", value=text_node.text)
-    if tag == TextType.LINK:
+    if text_node.text_type == TextType.LINK:
         if text_node.url is None:
             raise ValueError("link TextNode must have a url")
         return LeafNode(tag="a", value=text_node.text, props={"href": text_node.url})
-    if tag == TextType.IMAGE:
+    if text_node.text_type == TextType.IMAGE:
         if text_node.url is None:
             raise ValueError("img TextNode must have a url")
         return LeafNode(
