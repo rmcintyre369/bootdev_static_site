@@ -1,4 +1,5 @@
 import unittest
+from markdown_to_html import markdown_to_html_node, extract_title
 from markdown_to_blocks import markdown_to_blocks, block_to_block_type, BlockType
 
 
@@ -34,6 +35,20 @@ This is the same paragraph on a new line
 
     def test_ordered_list_block_type(self):
         self.assertEqual(block_to_block_type("1. first item"), BlockType.OLIST)
+
+    def test_paragraph(self):
+        md = "this is a paragraph"
+        node = markdown_to_html_node(md)
+        self.assertEqual(node.to_html(), "<div><p>this is a paragraph</p></div>")
+
+    def test_heading(self):
+        md = "## this is a heading"
+        node = markdown_to_html_node(md)
+        self.assertEqual(node.to_html(), "<div><h2>this is a heading</h2></div>")
+
+    def test_extract_heading(self):
+        md = "# this is a heading"
+        self.assertEqual(extract_title(md), "this is a heading")
 
 
 if __name__ == "__main__":

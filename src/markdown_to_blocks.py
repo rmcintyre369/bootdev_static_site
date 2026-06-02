@@ -24,9 +24,9 @@ def markdown_to_blocks(text: str) -> list[str]:
 def block_to_block_type(block: str) -> BlockType:
     lines = block.split("\n")
 
-    if block.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
+    if re.match("#{1,6} ", block):
         return BlockType.HEADING
-    if len(lines) > 1 and lines[0].startswith("```") and lines[-1].startswith("```"):
+    if re.match(r"^```[\s\S]*```$", block):
         return BlockType.CODE
     if block.startswith(">"):
         for line in lines:
